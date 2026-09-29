@@ -1,0 +1,72 @@
+{
+  "manifest_version": 3,
+  "name": "Mawdy - Cartas de Garantía VDR",
+  "version": "1.1.1.2",
+  "description": "Versión estable 1.1.1 con catálogo importable y corrección de logo PDF.",
+  "permissions": [
+    "storage",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://minerva-pre.mawdy.com/*",
+    "https://minerva-eus.mawdy.com/*",
+    "https://api-pre.mia-assistance.com/*",
+    "https://api.mia-assistance.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://minerva-pre.mawdy.com/*",
+        "https://minerva-eus.mawdy.com/*"
+      ],
+      "js": [
+        "hook.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://minerva-pre.mawdy.com/*",
+        "https://minerva-eus.mawdy.com/*"
+      ],
+      "js": [
+        "pdf-lib.min.js",
+        "fontkit.umd.min.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "master-data.json",
+        "assets/*"
+      ],
+      "matches": [
+        "https://minerva-pre.mawdy.com/*",
+        "https://minerva-eus.mawdy.com/*"
+      ]
+    }
+  ],
+  "action": {
+    "default_title": "MAWDY VDR - Catálogo",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  }
+}
